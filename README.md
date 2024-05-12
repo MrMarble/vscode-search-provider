@@ -1,4 +1,5 @@
-# CSP (Code Search Provider)
+# VSCode Search Provider
+![GitHub License](https://img.shields.io/github/license/mrmarble/vscode-search-provider)
 
 ## Description
 
@@ -8,6 +9,8 @@ VSCode Search Provider Extension is a Gnome Shell Extension that integrates Visu
 
 - Supports GNOME Shell 45 - 46
 - List all your Visual Studio Code projects
+
+![screenshot.png](screenshot.png)
 
 ## Installation
 ### Installation from GitHub repository
