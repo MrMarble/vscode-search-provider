@@ -2,7 +2,7 @@
   "name": "VSCode Search Provider",
   "description": "Search for your vscode workspaces easily",
   "uuid": "vscode-search-provider@mrmarble.github.com",
-  "url": "https:/github.com/mrmarble/vscode-search-provider",
+  "url": "https://github.com/mrmarble/vscode-search-provider",
   "donations": {
     "github": "mrmarble"
   },
