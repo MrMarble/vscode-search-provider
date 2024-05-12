@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "outDir": "./dist",
+    "sourceMap": false,
+    "isolatedModules": true,
+    "strict": true,
+    "target": "ES2022",
+    "lib": [
+      "ES2022"
+    ],
+    "skipLibCheck": true
+  },
+  "include": [
+    "gnome.d.ts",
+    "src/**/*.ts"
+  ]
+}

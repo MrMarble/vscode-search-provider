@@ -1,0 +1,43 @@
+{
+  "name": "vscode-search-provider",
+  "version": "0.0.0",
+  "description": "Provide search results from vscode",
+  "type": "module",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrmarble/vscode-search-provider.git"
+  },
+  "author": "Alvaro Tinoco <contact@mrmarble.dev>",
+  "license": "LGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/mrmarble/vscode-search-provider/issues"
+  },
+  "homepage": "https://github.com/mrmarble/vscode-search-provider#readme",
+  "sideEffects": false,
+  "config": {
+    "domain": "mrmarble.github.com"
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint . --fix -c eslint.config.js",
+    "clean": "rm -rf dist && rm -f ${npm_package_name}.zip",
+    "pack": "cp metadata.json dist && cd dist && zip ../${npm_package_name}.zip -9r .",
+    "install-extension": "touch ~/.local/share/gnome-shell/extensions/${npm_package_name}@${npm_package_config_domain} && rm -rf ~/.local/share/gnome-shell/extensions/${npm_package_name}@${npm_package_config_domain} && mv dist ~/.local/share/gnome-shell/extensions/${npm_package_name}@${npm_package_config_domain}",
+    "setup": "npm run clean && npm run build && npm run pack && npm run install-extension",
+    "debug": "dbus-run-session -- gnome-shell --nested --wayland"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.2.0",
+    "esbuild": "^0.21.1",
+    "eslint": "^8.57.0",
+    "globals": "^15.2.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.8.0"
+  },
+  "dependencies": {
+    "@girs/gjs": "^4.0.0-beta.5",
+    "@girs/gnome-shell": "^46.0.0-beta8"
+  }
+}
