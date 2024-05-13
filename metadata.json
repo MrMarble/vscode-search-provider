@@ -1,6 +1,6 @@
 {
   "name": "VSCode Search Provider",
-  "description": "Search for your vscode workspaces easily.This extension is not affiliated, funded, or in any way associated with Microsoft and vscode software.",
+  "description": "Search for your vscode workspaces easily. This extension is not affiliated, funded, or in any way associated with Microsoft and vscode software.",
   "uuid": "vscode-search-provider@mrmarble.github.com",
   "url": "https://github.com/mrmarble/vscode-search-provider",
   "donations": {
