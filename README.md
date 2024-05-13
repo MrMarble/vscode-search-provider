@@ -9,7 +9,8 @@ VSCode Search Provider Extension is a Gnome Shell Extension that integrates Visu
 
 - Supports GNOME Shell 45 - 46
 - List all your Visual Studio Code projects
-
+- 
+[<img alt="" height="100" src="https://raw.githubusercontent.com/andyholmes/gnome-shell-extensions-badge/master/get-it-on-ego.svg?sanitize=true">](https://extensions.gnome.org/extension/6976/)
 ![screenshot.png](screenshot.png)
 
 ## Installation
