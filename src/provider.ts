@@ -42,7 +42,7 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
       this.app = Shell.AppSystem.get_default().lookup_app(ids[i] + ".desktop");
     }
     if (!this.app) {
-      log("Failed to find vscode application");
+      console.log("Failed to find vscode application");
     }
 
     this.appInfo = this.app?.appInfo;
@@ -81,61 +81,4 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
       createIcon: (size: number) => this.app?.create_icon_texture(size),
     }));
   }
-
-  /*
-  createResultObject(metaInfo: unknown, terms: string) {
-    return null
-    metaInfo.createIcon = (size) => {
-      const theme = new St.IconTheme();
-      const box = new St.BoxLayout();
-      let icon;
-
-      if (this.vscodeApp) {
-        icon = this.vscodeApp.create_icon_texture(size);
-      }
-
-       if (!icon || !icon.gicon)
-       {
-           // try different icon names
-           let gicon = null;
-           for (let i = 0; !gicon && i < ids.length; i++) {
-               let name = ids[i];
-               if (theme.has_icon(name)) {
-                   gicon = new Gio.ThemedIcon({name: name});
-               }
-           }
-           if (!gicon)
-               log("Failed to find icon for remmina");
-           // handle display scaling
-           let scale_factor = St.ThemeContext.get_for_stage(global.stage).scale_factor;
-           icon = new St.Icon({ gicon: gicon,
-                                icon_size: size / scale_factor });
-       }
-
-       
-      box.add_child(icon);
-      
-      if (metaInfo.protocol in emblems) {
-          // remmina emblems are fixed size of 22 pixels
-          let size = 22;
-          let name = emblems[metaInfo.protocol];
-          if (!theme.has_icon(name)) {
-              // try with org.remmina.Remmina prefix as more recent
-              // releases have changed to use this full prefix
-              name = name.replace('remmina', 'org.remmina.Remmina');
-              if (!theme.has_icon(name)) {
-                  // also try with -symbolic suffix
-                  name = name + '-symbolic';
-              }
-          }
-          let emblem = new St.Icon({ gicon: new Gio.ThemedIcon({name: name}),
-                                     icon_size: size});
-          box.add_child(emblem);
-      }
-      
-      return box;
-    };
-
-    return new Search.ListSearchResult(this, metaInfo, Main.overview.searchController._searchResults)
-  }*/
 }
