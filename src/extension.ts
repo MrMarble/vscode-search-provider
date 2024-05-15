@@ -3,7 +3,6 @@ import { Extension } from "resource:///org/gnome/shell/extensions/extension.js";
 import { AppSearchProvider } from "resource:///org/gnome/shell/ui/appDisplay.js";
 import VSCodeSearchProvider from "./provider.js";
 
-
 export default class VSCodeSearchProviderExtension extends Extension {
   provider: AppSearchProvider | null = null;
   enable() {

@@ -22,7 +22,7 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
 
     const configDir = Glib.get_user_config_dir();
     const vscStorage = readFile(
-      `${configDir}/Code/User/globalStorage/storage.json`
+      `${configDir}/Code/User/globalStorage/storage.json`,
     );
     if (!vscStorage) {
       console.error("Could not read VSCode storage file");
@@ -52,7 +52,7 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
     if (this.app) {
       this.app?.app_info.launch(
         [Gio.file_new_for_path(this.workspaces[result].path)],
-        null
+        null,
       );
     }
   }
@@ -63,13 +63,13 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
 
   async getInitialResultSet(terms: string[]) {
     return Object.keys(this.workspaces).filter((id) =>
-      this.workspaces[id].name.includes(terms.join(""))
+      this.workspaces[id].name.includes(terms.join("")),
     );
   }
 
   async getSubsearchResultSet(previousResults: string[], terms: string[]) {
     return previousResults.filter((id) =>
-      this.workspaces[id].name.includes(terms.join(""))
+      this.workspaces[id].name.includes(terms.join("")),
     );
   }
 
