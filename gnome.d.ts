@@ -3,7 +3,10 @@ import "@girs/gjs/dom";
 import "@girs/gnome-shell/ambient";
 import "@girs/gnome-shell/extensions/global";
 import { AppSearchProvider } from "resource:///org/gnome/shell/ui/appDisplay.js";
-import { Extension,ExtensionMetadata } from "resource:///org/gnome/shell/extensions/extension.js";
+import {
+  Extension,
+  ExtensionMetadata,
+} from "resource:///org/gnome/shell/extensions/extension.js";
 
 declare module "resource:///org/gnome/shell/ui/main.js" {
   export module overview {
@@ -25,7 +28,6 @@ declare module "resource:///org/gnome/shell/extensions/extension.gg" {
 }
 
 declare module "resource:///org/gnome/shell/ui/appDisplay.js" {
-
   export interface ResultMeta {
     id: string;
     name: string;
@@ -46,7 +48,7 @@ declare module "resource:///org/gnome/shell/ui/appDisplay.js" {
      */
     getResultMetas(
       results: string[],
-      cancellable: Gio.Cancellable
+      cancellable: Gio.Cancellable,
     ): Promise<ResultMeta[]>;
 
     /**
@@ -59,7 +61,7 @@ declare module "resource:///org/gnome/shell/ui/appDisplay.js" {
      */
     getInitialResultSet(
       terms: string[],
-      cancellable: Gio.Cancellable
+      cancellable: Gio.Cancellable,
     ): Promise<string[]>;
 
     /**
@@ -77,7 +79,7 @@ declare module "resource:///org/gnome/shell/ui/appDisplay.js" {
     getSubsearchResultSet(
       results: string[],
       terms: string[],
-      cancellable: Gio.Cancellable
+      cancellable: Gio.Cancellable,
     ): Promise<string[]>;
 
     /**
