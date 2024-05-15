@@ -21,18 +21,38 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint . --fix -c eslint.config.js",
+    "format": "prettier --write .",
     "clean": "rm -rf dist && rm -f ${npm_package_name}.zip",
     "pack": "cp metadata.json dist && cd dist && zip ../${npm_package_name}.zip -9r .",
     "install-extension": "touch ~/.local/share/gnome-shell/extensions/${npm_package_name}@${npm_package_config_domain} && rm -rf ~/.local/share/gnome-shell/extensions/${npm_package_name}@${npm_package_config_domain} && mv dist ~/.local/share/gnome-shell/extensions/${npm_package_name}@${npm_package_config_domain}",
     "setup": "npm run clean && npm run build && npm run pack && npm run install-extension",
-    "debug": "dbus-run-session -- gnome-shell --nested --wayland"
+    "debug": "dbus-run-session -- gnome-shell --nested --wayland",
+    "prepare": "simple-git-hooks"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged",
+    "pre-push": "npm run format"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
     "@eslint/js": "^9.2.0",
+    "bumpp": "^9.4.1",
     "esbuild": "^0.21.1",
     "eslint": "^8.57.0",
     "globals": "^15.2.0",
+    "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
+    "semantic-release": "^23.1.1",
+    "simple-git-hooks": "^2.11.1",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.8.0"
   },
