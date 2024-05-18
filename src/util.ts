@@ -11,3 +11,6 @@ export const readFile = (path: string): string | undefined => {
 
   return new TextDecoder().decode(data);
 };
+
+export const fileExists = (path: string): boolean =>
+  Glib.file_test(path, Glib.FileTest.EXISTS);
