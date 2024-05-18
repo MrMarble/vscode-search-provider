@@ -3,7 +3,7 @@ import Gio from "gi://Gio";
 import Shell from "gi://Shell";
 import { Extension } from "resource:///org/gnome/shell/extensions/extension.js";
 import { AppSearchProvider } from "resource:///org/gnome/shell/ui/appDisplay.js";
-import { readFile, uniqueId } from "./util.js";
+import { fileExists, readFile, uniqueId } from "./util.js";
 
 interface VSStorage {
   profileAssociations: {
@@ -19,16 +19,13 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
 
   constructor(extension: Extension) {
     this.extension = extension;
+    this._findApp();
 
-    const configDir = Glib.get_user_config_dir();
-    const vscStorage = readFile(
-      `${configDir}/Code/User/globalStorage/storage.json`,
-    );
-    if (!vscStorage) {
-      console.error("Could not read VSCode storage file");
+    const codeConfig = this._getConfig();
+    if (!codeConfig) {
+      console.error("Failed to read vscode storage.json");
       return;
     }
-    const codeConfig: VSStorage = JSON.parse(vscStorage);
 
     const paths = Object.keys(codeConfig.profileAssociations.workspaces).sort();
 
@@ -37,15 +34,59 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
       this.workspaces[uniqueId()] = { name, path: path.replace("file://", "") };
     }
 
-    const ids = ["code", "code-insiders", "code-oss"];
+    this.appInfo = this.app?.appInfo;
+  }
+
+  _getConfig(): VSStorage | undefined {
+    const configDirs = [
+      Glib.get_user_config_dir(),
+      `${Glib.get_home_dir()}/.var/app`,
+    ];
+
+    const appDirs = [
+      // XDG_CONFIG_DIRS
+      "Code",
+      "Code - Insiders",
+      "VSCodium",
+      "VSCodium - Insiders",
+
+      // Flatpak
+      "com.vscodium.codium/config/VSCodium",
+      "com.vscodium.codium-insiders/config/VSCodium - Insiders",
+    ];
+
+    for (const configDir of configDirs) {
+      for (const appDir of appDirs) {
+        const path = `${configDir}/${appDir}/User/globalStorage/storage.json`;
+        if (!fileExists(path)) {
+          continue;
+        }
+
+        const storage = readFile(path);
+
+        if (storage) {
+          return JSON.parse(storage);
+        }
+      }
+    }
+  }
+
+  _findApp() {
+    const ids = [
+      "code",
+      "code-insiders",
+      "code-oss",
+      "com.vscodium.codium",
+      "com.vscodium.codium-insiders",
+    ];
+
     for (let i = 0; !this.app && i < ids.length; i++) {
       this.app = Shell.AppSystem.get_default().lookup_app(ids[i] + ".desktop");
     }
-    if (!this.app) {
-      console.log("Failed to find vscode application");
-    }
 
-    this.appInfo = this.app?.appInfo;
+    if (!this.app) {
+      console.error("Failed to find vscode application");
+    }
   }
 
   activateResult(result: string): void {
