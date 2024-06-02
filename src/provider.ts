@@ -30,6 +30,9 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
     const paths = Object.keys(codeConfig.profileAssociations.workspaces).sort();
 
     for (const path of paths) {
+      if (path.startsWith("vscode-remote://dev-container")) {
+        continue
+      }
       const name = path.split("/").pop()!;
       this.workspaces[uniqueId()] = { name, path: path.replace("file://", "") };
     }
