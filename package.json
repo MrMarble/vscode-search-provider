@@ -24,7 +24,7 @@
     "format": "prettier --write .",
     "clean": "rm -rf dist && rm -f ${npm_package_name}.zip",
     "pack": "cp metadata.json dist && cd dist && zip ../${npm_package_name}.zip -9r .",
-    "install-extension": "touch ~/.local/share/gnome-shell/extensions/${npm_package_name}@${npm_package_config_domain} && rm -rf ~/.local/share/gnome-shell/extensions/${npm_package_name}@${npm_package_config_domain} && mv dist ~/.local/share/gnome-shell/extensions/${npm_package_name}@${npm_package_config_domain}",
+    "install-extension": "touch $XDG_CONFIG_HOME/local/share/gnome-shell/extensions/${npm_package_name}@${npm_package_config_domain} && rm -rf $XDG_CONFIG_HOME/local/share/gnome-shell/extensions/${npm_package_name}@${npm_package_config_domain} && mv dist $XDG_CONFIG_HOME/local/share/gnome-shell/extensions/${npm_package_name}@${npm_package_config_domain}",
     "setup": "npm run clean && npm run build && npm run pack && npm run install-extension",
     "debug": "dbus-run-session -- gnome-shell --nested --wayland",
     "prepare": "simple-git-hooks"
