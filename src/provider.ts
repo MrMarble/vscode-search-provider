@@ -20,7 +20,11 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
   constructor(extension: Extension) {
     this.extension = extension;
     this._findApp();
+    this._loadWorkspaces();
+    this.appInfo = this.app?.appInfo;
+  }
 
+  _loadWorkspaces() {
     const codeConfig = this._getConfig();
     if (!codeConfig) {
       console.error("Failed to read vscode storage.json");
@@ -29,6 +33,7 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
 
     const paths = Object.keys(codeConfig.profileAssociations.workspaces).sort();
 
+    this.workspaces = {};
     for (const path of paths) {
       if (path.startsWith("vscode-remote://dev-container")) {
         continue
@@ -36,8 +41,6 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
       const name = path.split("/").pop()!;
       this.workspaces[uniqueId()] = { name, path: path.replace("file://", "") };
     }
-
-    this.appInfo = this.app?.appInfo;
   }
 
   _getConfig(): VSStorage | undefined {
@@ -106,6 +109,7 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
   }
 
   async getInitialResultSet(terms: string[]) {
+    this._loadWorkspaces();
     return Object.keys(this.workspaces).filter((id) =>
       this.workspaces[id].name.includes(terms.join("")),
     );
