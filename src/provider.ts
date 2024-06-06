@@ -39,7 +39,7 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
         continue;
       }
       const name = path.split("/").pop()!;
-      this.workspaces[uniqueId()] = { name, path: path.replace("file://", "") };
+      this.workspaces[uniqueId()] = { name: name.replace(".code-workspace", " Workspace") , path: path.replace("file://", "") };
     }
   }
 
@@ -97,10 +97,19 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
 
   activateResult(result: string): void {
     if (this.app) {
-      this.app?.app_info.launch(
-        [Gio.file_new_for_path(this.workspaces[result].path)],
-        null,
-      );
+      const path = this.workspaces[result].path;
+      if (path.startsWith("vscode-remote://")) {
+        const lastSegment = path.split('/').pop();
+        const type = lastSegment?.slice(1)?.includes('.') ? 'file' : 'folder';
+
+        const command = this.app?.app_info.get_executable() + ' --' + type + '-uri ' + path;
+        Glib.spawn_command_line_async(command);
+      }else{
+        this.app?.app_info.launch(
+          [Gio.file_new_for_path(path)],
+          null,
+        );
+      }
     }
   }
 
@@ -110,14 +119,16 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
 
   async getInitialResultSet(terms: string[]) {
     this._loadWorkspaces();
+    const searchTerm = terms.join("").toLowerCase();
     return Object.keys(this.workspaces).filter((id) =>
-      this.workspaces[id].name.includes(terms.join("")),
+        this.workspaces[id].name.toLowerCase().includes(searchTerm)
     );
   }
 
   async getSubsearchResultSet(previousResults: string[], terms: string[]) {
+    const searchTerm = terms.join("").toLowerCase();
     return previousResults.filter((id) =>
-      this.workspaces[id].name.includes(terms.join("")),
+        this.workspaces[id].name.toLowerCase().includes(searchTerm)
     );
   }
 
