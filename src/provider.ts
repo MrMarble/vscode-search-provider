@@ -97,7 +97,7 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
       const path = this.workspaces[result].path;
       if (path.startsWith("vscode-remote://")) {
         const lastSegment = path.split('/').pop();
-        const type = lastSegment?.includes('.') ? 'file' : 'folder';
+        const type = lastSegment?.slice(1)?.includes('.') ? 'file' : 'folder';
 
         const command = this.app?.app_info.get_executable() + ' --' + type + '-uri ' + path;
         Glib.spawn_command_line_async(command);
