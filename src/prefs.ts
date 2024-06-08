@@ -6,10 +6,14 @@ import {
   gettext as _,
 } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 
+type Window = Adw.PreferencesWindow & {
+  _settings: Gio.Settings | null;
+};
+
 export default class ExamplePreferences extends ExtensionPreferences {
   _settings: Gio.Settings | null = null;
 
-  fillPreferencesWindow(window: Adw.PreferencesWindow) {
+  fillPreferencesWindow(window: Window) {
     // Create a preferences page, with a single group
     const page = new Adw.PreferencesPage({
       title: _("General"),
@@ -34,7 +38,12 @@ export default class ExamplePreferences extends ExtensionPreferences {
     group.add(row);
 
     // Create a settings object and bind the row to the `show-indicator` key
-    this._settings = this.getSettings();
-    this._settings.bind("suffix", row, "active", Gio.SettingsBindFlags.DEFAULT);
+    window._settings = this.getSettings();
+    window._settings.bind(
+      "suffix",
+      row,
+      "active",
+      Gio.SettingsBindFlags.DEFAULT,
+    );
   }
 }
