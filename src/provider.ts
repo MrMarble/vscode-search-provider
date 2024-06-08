@@ -11,13 +11,16 @@ interface VSStorage {
   };
 }
 
-export default class VSCodeSearchProvider implements AppSearchProvider {
+export default class VSCodeSearchProvider<
+  T extends Extension & { _settings: Gio.Settings | null },
+> implements AppSearchProvider
+{
   workspaces: Record<string, { name: string; path: string }> = {};
-  extension: Extension;
+  extension: T;
   app: Shell.App | null = null;
   appInfo: Gio.DesktopAppInfo | undefined;
 
-  constructor(extension: Extension) {
+  constructor(extension: T) {
     this.extension = extension;
     this._findApp();
     this._loadWorkspaces();
@@ -118,6 +121,10 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
   }
 
   _customSuffix(path: string) {
+    if (!this.extension?._settings?.get_boolean("suffix")) {
+      return "";
+    }
+
     const prefixes = {
       "vscode-remote://codespaces": "[Codespaces]",
       "vscode-remote://": "[Remote]",
