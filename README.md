@@ -1,7 +1,8 @@
 # VSCode Search Provider
 
 ![GitHub License](https://img.shields.io/github/license/mrmarble/vscode-search-provider)
-![Dynamic XML Badge](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fextensions.gnome.org%2Fextension%2F6976%2Fvscode-search-provider%2F&query=%2Fhtml%2Fbody%2Fdiv%5B2%5D%2Fdiv%2Fdiv%5B2%5D%2Fdiv%5B1%5D%2Fspan%5B3%5D&logo=gnome&label=GNOME%20extensions&cacheSeconds=86400)
+[![Lint](https://github.com/MrMarble/vscode-search-provider/actions/workflows/eslint.yml/badge.svg)](https://github.com/MrMarble/vscode-search-provider/actions/workflows/eslint.yml)
+![GNOME Extensions download](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fextensions.gnome.org%2Fextension%2F6976%2Fvscode-search-provider%2F&query=%2Fhtml%2Fbody%2Fdiv%5B2%5D%2Fdiv%2Fdiv%5B2%5D%2Fdiv%5B1%5D%2Fspan%5B3%5D&logo=gnome&label=GNOME%20extensions&cacheSeconds=86400)
 
 ## Description
 
@@ -12,7 +13,8 @@ VSCode Search Provider Extension is a Gnome Shell Extension that integrates Visu
 ## Features
 
 - Supports GNOME Shell 45 - 46
-- List all your Visual Studio Code projects
+- List all your local VSCode workspaces
+- List all your remote VSCode projects
 
 ## Installation
 
