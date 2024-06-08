@@ -101,7 +101,10 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
   activateResult(result: string): void {
     if (this.app) {
       const path = decodeURIComponent(this.workspaces[result].path);
-      if (path.startsWith("vscode-remote://")) {
+      if (
+        path.startsWith("vscode-remote://") ||
+        path.startsWith("vscode-vfs://")
+      ) {
         const lastSegment = path.split("/").pop();
         const type = lastSegment?.slice(1)?.includes(".") ? "file" : "folder";
 
