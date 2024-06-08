@@ -20,8 +20,10 @@
   },
   "scripts": {
     "build": "tsc",
-    "lint": "eslint . --fix -c eslint.config.js",
-    "format": "prettier --write .",
+    "lint": "eslint .  -c eslint.config.js",
+    "lint:fix": "eslint .  -c eslint.config.js",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
     "clean": "rm -rf dist && rm -f ${npm_package_name}.zip",
     "pack": "cp metadata.json dist && cd dist && zip ../${npm_package_name}.zip -9r .",
     "install-extension": "touch $XDG_CONFIG_HOME/local/share/gnome-shell/extensions/${npm_package_name}@${npm_package_config_domain} && rm -rf $XDG_CONFIG_HOME/local/share/gnome-shell/extensions/${npm_package_name}@${npm_package_config_domain} && mv dist $XDG_CONFIG_HOME/local/share/gnome-shell/extensions/${npm_package_name}@${npm_package_config_domain}",
