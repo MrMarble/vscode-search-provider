@@ -21,7 +21,7 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint .  -c eslint.config.js",
-    "lint:fix": "eslint .  -c eslint.config.js",
+    "lint:fix": "eslint --fix . -c eslint.config.js",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
     "clean": "rm -rf dist && rm -f ${npm_package_name}.zip",
@@ -48,6 +48,8 @@
     "bumpp": "^9.4.1",
     "esbuild": "^0.21.1",
     "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
     "globals": "^15.2.0",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
