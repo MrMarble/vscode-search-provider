@@ -117,6 +117,22 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
     }
   }
 
+  _customSuffix(path: string) {
+    const prefixes = {
+      "vscode-remote://codespaces": "[Codespaces]",
+      "vscode-remote://": "[Remote]",
+      "vscode-vfs://github": "[Github]",
+    };
+
+    for (const prefix of Object.keys(prefixes)) {
+      if (path.startsWith(prefix)) {
+        return " " + prefixes[prefix as keyof typeof prefixes];
+      }
+    }
+
+    return "";
+  }
+
   filterResults(results: string[], maxResults: number) {
     return results.slice(0, maxResults);
   }
@@ -139,7 +155,8 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
   async getResultMetas(ids: string[]) {
     return ids.map((id) => ({
       id,
-      name: this.workspaces[id].name,
+      name:
+        this.workspaces[id].name + this._customSuffix(this.workspaces[id].path),
       description: this.workspaces[id].path,
       createIcon: (size: number) => this.app?.create_icon_texture(size),
     }));
