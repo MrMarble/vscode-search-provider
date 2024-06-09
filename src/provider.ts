@@ -11,13 +11,16 @@ interface VSStorage {
   };
 }
 
-export default class VSCodeSearchProvider implements AppSearchProvider {
+export default class VSCodeSearchProvider<
+  T extends Extension & { _settings: Gio.Settings | null },
+> implements AppSearchProvider
+{
   workspaces: Record<string, { name: string; path: string }> = {};
-  extension: Extension;
+  extension: T;
   app: Shell.App | null = null;
   appInfo: Gio.DesktopAppInfo | undefined;
 
-  constructor(extension: Extension) {
+  constructor(extension: T) {
     this.extension = extension;
     this._findApp();
     this._loadWorkspaces();
@@ -100,8 +103,11 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
 
   activateResult(result: string): void {
     if (this.app) {
-      const path = this.workspaces[result].path;
-      if (path.startsWith("vscode-remote://")) {
+      const path = decodeURIComponent(this.workspaces[result].path);
+      if (
+        path.startsWith("vscode-remote://") ||
+        path.startsWith("vscode-vfs://")
+      ) {
         const lastSegment = path.split("/").pop();
         const type = lastSegment?.slice(1)?.includes(".") ? "file" : "folder";
 
@@ -112,6 +118,26 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
         this.app?.app_info.launch([Gio.file_new_for_path(path)], null);
       }
     }
+  }
+
+  _customSuffix(path: string) {
+    if (!this.extension?._settings?.get_boolean("suffix")) {
+      return "";
+    }
+
+    const prefixes = {
+      "vscode-remote://codespaces": "[Codespaces]",
+      "vscode-remote://": "[Remote]",
+      "vscode-vfs://github": "[Github]",
+    };
+
+    for (const prefix of Object.keys(prefixes)) {
+      if (path.startsWith(prefix)) {
+        return " " + prefixes[prefix as keyof typeof prefixes];
+      }
+    }
+
+    return "";
   }
 
   filterResults(results: string[], maxResults: number) {
@@ -136,7 +162,8 @@ export default class VSCodeSearchProvider implements AppSearchProvider {
   async getResultMetas(ids: string[]) {
     return ids.map((id) => ({
       id,
-      name: this.workspaces[id].name,
+      name:
+        this.workspaces[id].name + this._customSuffix(this.workspaces[id].path),
       description: this.workspaces[id].path,
       createIcon: (size: number) => this.app?.create_icon_texture(size),
     }));

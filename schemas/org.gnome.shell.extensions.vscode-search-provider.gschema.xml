@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.vscode-search-provider" path="/org/gnome/shell/extensions/vscode-search-provider/">
+    <key name="suffix" type="b">
+      <default>true</default>
+      <summary>Boolean, whether to show a suffix next to the workspace name. (Remote, Codespaces...)</summary>
+    </key>
+  </schema>
+</schemalist>
