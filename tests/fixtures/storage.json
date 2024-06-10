@@ -1,0 +1,19 @@
+{
+  "profileAssociations": {
+      "workspaces": {
+          "file:///f%3A/repos/scribble-diffusion": "__default__profile__",
+          "vscode-remote://ssh-remote%2Belite/home/mrmarble/home-server": "__default__profile__",
+          "file:///c%3A/Users/alv_t/Desktop/Marlin-2.0.x": "__default__profile__",
+          "file:///f%3A/repos/Marlin": "__default__profile__",
+          "file:///f%3A/repos/AoC": "__default__profile__",
+          "file:///c%3A/Users/alv_t/AppData/Roaming/Code/User": "5c86a368",
+          "file:///e%3A/repos/jellyfin": "-38be0953",
+          "vscode-vfs://github.com/mrmarble/vscode-search-provider": "c79a890",
+          "vscode-remote://dev-container%2B7b22766f6c756d654e616d65223a22747970657363726970742d6e6f6465222c22666f6c646572223a22747970657363726970742d6e6f6465227d/workspaces/typescript-node": "__default__profile__",
+          "vscode-remote://dev-container%2B7b22686f737450617468223a225c5c5c5c77736c2e6c6f63616c686f73745c5c5562756e74755c5c686f6d655c5c6d726d6172626c655c5c7265706f735c5c74735c5c7673636f64652d7365617263682d70726f7669646572222c226c6f63616c446f636b6572223a66616c73652c22636f6e66696746696c65223a7b22246d6964223a312c2270617468223a222f686f6d652f6d726d6172626c652f7265706f732f74732f7673636f64652d7365617263682d70726f76696465722f2e646576636f6e7461696e65722f646576636f6e7461696e65722e6a736f6e222c22736368656d65223a227673636f64652d66696c65486f7374227d7d/workspaces/vscode-search-provider": "__default__profile__",
+          "vscode-remote://codespaces%2Bmusical-umbrella-q49qp6r4j92479x/workspaces/vscode-search-provider": "c79a890",
+          "vscode-remote://wsl%2Bubuntu/home/mrmarble/.dotfiles": "__default__profile__",
+          "vscode-remote://wsl%2Bubuntu/home/mrmarble/repos/ts/vscode-search-provider": "c79a890"
+      }
+  }
+}
