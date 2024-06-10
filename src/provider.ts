@@ -37,7 +37,7 @@ export default class VSCodeSearchProvider<
     const paths = Object.keys(codeConfig.profileAssociations.workspaces).sort();
 
     this.workspaces = {};
-    for (const path of paths) {
+    for (const path of paths.map(decodeURIComponent)) {
       if (path.startsWith("vscode-remote://dev-container")) {
         continue;
       }
@@ -103,7 +103,7 @@ export default class VSCodeSearchProvider<
 
   activateResult(result: string): void {
     if (this.app) {
-      const path = decodeURIComponent(this.workspaces[result].path);
+      const path = this.workspaces[result].path;
       if (
         path.startsWith("vscode-remote://") ||
         path.startsWith("vscode-vfs://")
