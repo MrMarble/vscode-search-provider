@@ -1,6 +1,6 @@
 {
   "name": "vscode-search-provider",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Provide search results from vscode",
   "type": "module",
   "private": true,

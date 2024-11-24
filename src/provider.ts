@@ -88,6 +88,8 @@ export default class VSCodeSearchProvider<
       "code",
       "code-insiders",
       "code-oss",
+      "codium",
+      "codium-insiders",
       "com.vscodium.codium",
       "com.vscodium.codium-insiders",
     ];
