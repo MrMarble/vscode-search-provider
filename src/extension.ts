@@ -12,6 +12,12 @@ export default class VSCodeSearchProviderExtension extends Extension {
     this._settings = this.getSettings();
     this.provider = new VSCodeSearchProvider(this);
     Main.overview.searchController.addProvider(this.provider);
+
+    if (this._settings?.get_boolean("override-results-order")) {
+      const searchResults = Main.overview.searchController._searchResults;
+      searchResults._content.remove_child(this.provider.display);
+      searchResults._content.insert_child_at_index(this.provider.display, 1);
+    }
   }
 
   disable() {
