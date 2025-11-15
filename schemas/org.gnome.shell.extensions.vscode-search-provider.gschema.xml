@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
   <schema id="org.gnome.shell.extensions.vscode-search-provider" path="/org/gnome/shell/extensions/vscode-search-provider/">
+    <key name="override-results-order" type="b">
+      <default>false</default>
+      <summary>Boolean, whether to override the default search results order to prioritize VS Code workspaces. Requires disabling and re-enabling the extension to take effect.</summary>
+    </key>
     <key name="suffix" type="b">
       <default>true</default>
       <summary>Boolean, whether to show a suffix next to the workspace name. (Remote, Codespaces...)</summary>
+    </key>
+    <key name="include-dev-containers" type="b">
+      <default>true</default>
+      <summary>Boolean, whether to include dev containers in the workspace list.</summary>
+    </key>
+    <key name="include-code-spaces" type="b">
+      <default>true</default>
+      <summary>Boolean, whether to include code spaces in the workspace list.</summary>
+    </key>
+    <key name="include-github" type="b">
+      <default>true</default>
+      <summary>Boolean, whether to include GitHub Virtual Files Systems in the workspace list.</summary>
     </key>
   </schema>
 </schemalist>

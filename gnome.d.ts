@@ -13,6 +13,12 @@ declare module "resource:///org/gnome/shell/ui/main.js" {
     export module searchController {
       export function addProvider(provider: AppSearchProvider): void;
       export function removeProvider(provider: AppSearchProvider): void;
+      export const _searchResults: {
+        _content: {
+          remove_child(child: Any): void;
+          insert_child_at_index(child: object, index: number): void;
+        };
+      };
     }
   }
 }
@@ -37,6 +43,8 @@ declare module "resource:///org/gnome/shell/ui/appDisplay.js" {
 
   export class AppSearchProvider {
     constructor(extension: Extension);
+
+    display: unknown;
 
     /**
      * Launch the search result.
