@@ -15,8 +15,8 @@ declare module "resource:///org/gnome/shell/ui/main.js" {
       export function removeProvider(provider: AppSearchProvider): void;
       export const _searchResults: {
         _content: {
-          remove_child(child: Any): void;
-          insert_child_at_index(child: object, index: number): void;
+          remove_child(child: unknown): void;
+          insert_child_at_index(child: unknown, index: number): void;
         };
       };
     }
