@@ -15,8 +15,12 @@ export default class VSCodeSearchProviderExtension extends Extension {
 
     if (this._settings?.get_boolean("override-results-order")) {
       const searchResults = Main.overview.searchController._searchResults;
+      // Rearrange the search results to put our provider just after apps.
       searchResults._content.remove_child(this.provider.display);
       searchResults._content.insert_child_at_index(this.provider.display, 1);
+      // Switch the providers order so it selects the first item in this provider by default.
+      searchResults._providers.splice(1, 0, this.provider);
+      searchResults._providers.pop();
     }
   }
 

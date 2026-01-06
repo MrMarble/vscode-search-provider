@@ -14,6 +14,7 @@ declare module "resource:///org/gnome/shell/ui/main.js" {
       export function addProvider(provider: AppSearchProvider): void;
       export function removeProvider(provider: AppSearchProvider): void;
       export const _searchResults: {
+        _providers: AppSearchProvider[];
         _content: {
           remove_child(child: unknown): void;
           insert_child_at_index(child: unknown, index: number): void;
