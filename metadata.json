@@ -6,6 +6,6 @@
   "donations": {
     "github": "mrmarble"
   },
-  "shell-version": ["45", "46", "47", "48", "49"],
+  "shell-version": ["45", "46", "47", "48", "49", "50"],
   "settings-schema": "org.gnome.shell.extensions.vscode-search-provider"
 }
