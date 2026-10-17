@@ -139,7 +139,9 @@ export default class VSCodeSearchProvider<
   _setApp() {
     this.app = [
       "code",
+      "com.microsoft.VSCode",
       "code-insiders",
+      "com.microsoft.VSCodeInsiders",
       "code-oss",
       "codium",
       "codium-insiders",
